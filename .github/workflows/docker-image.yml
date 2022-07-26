@@ -15,4 +15,13 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      run: docker build . --file Dockerfile --tag holse/corp_certs
+
+    - name: Login to docker
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_LOGIN }}
+        password: ${{ secrets.DOCKER_TOKEN }}
+    - name: Push to docker
+      run: docker push holse/corp_certs
+      

@@ -3,7 +3,7 @@
 __version__ = '0.1'
 __author__ = 'sokolovmy@gmail.com'
 
-
+db_file_name = '/var/lib/zabbix/corp_certs_cache.db'
 
 excluded_names = [
     '@',

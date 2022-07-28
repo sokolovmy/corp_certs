@@ -1,0 +1,23 @@
+ARG ZBX_VERSION=alpine-6.0-latest
+# FROM python:3.10-alpine3.15
+FROM zabbix/zabbix-agent2:${ZBX_VERSION}
+
+USER 0
+
+ENV ZBX_TIMEOUT=30
+
+COPY ./*.py /opt/certs/
+COPY ./requirements.txt /requirements.txt
+COPY ./zabbix_agent_corp_certs.conf /etc/zabbix/zabbix_agentd.d/
+
+RUN apk add --no-cache python3 py3-pip &&\
+    pip install --no-cache-dir -r /requirements.txt &&\
+    chmod +x /opt/certs/corp_cert.py &&\
+    ln -s /usr/bin/python3 /usr/local/bin/python &&\
+    rm -rf /var/cache/apk/*
+
+VOLUME [ "/var/lib/zabbix" ]
+
+# WORKDIR /opt/certs
+# ENTRYPOINT [ "/opt/certs/corp_cert.py" ]
+# ENTRYPOINT [ "/bin/sh" ]

@@ -1,6 +1,7 @@
 import hashlib
 import sqlite3
 from datetime import datetime, timezone
+from config import db_file_name
 
 
 _create_certs_db_sql_ = '''
@@ -13,7 +14,7 @@ CREATE TABLE IF NOT EXISTS certs (
 
 
 class CacheDB:
-    def __init__(self, dbFileName='/db/cache.db'):
+    def __init__(self, dbFileName=db_file_name):
         self.con = sqlite3.connect(dbFileName)
         self._initDB()
 

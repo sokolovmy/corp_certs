@@ -16,6 +16,9 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag holse/corp_certs
+    
+    - name: Build second Docker image
+      run: docker build . --file Dockerfile.zabbix-agent2 --tag holse/corp_certs:zabbix-agent2-latest
 
     - name: Login to docker
       uses: docker/login-action@v1
@@ -24,4 +27,7 @@ jobs:
         password: ${{ secrets.DOCKER_TOKEN }}
     - name: Push to docker
       run: docker push holse/corp_certs
+    
+    - name: Push to docker 2
+      run: docker push holse/corp_certs:zabbix-agent3-latest
       

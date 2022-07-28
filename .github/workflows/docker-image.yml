@@ -29,5 +29,5 @@ jobs:
       run: docker push holse/corp_certs
     
     - name: Push to docker 2
-      run: docker push holse/corp_certs:zabbix-agent3-latest
+      run: docker push holse/corp_certs:zabbix-agent2-latest
       
